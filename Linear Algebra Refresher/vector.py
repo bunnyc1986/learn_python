@@ -62,9 +62,12 @@ class Vector(object):
     def is_close(a, b, rel_tol=1e-10):
         return abs(a-b) <= rel_tol
 
+    def is_zero(self):
+        return Vector.is_close(self.magnitude(), 0)
+    
     def is_parallel(self, v):
-        if (Vector.is_close(self.magnitude(), 0) or
-            Vector.is_close(v.magnitude(), 0)):
+        if (self.is_zero() or
+            v.is_zero()):
             return True
         result = True
         for v1, v2 in zip(self.normalized().coordinates, v.normalized().coordinates):
